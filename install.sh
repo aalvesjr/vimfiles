@@ -27,7 +27,7 @@ if [[ $? -eq 0 ]]; then
   ln -s ${VIMFILES_PATH}/vimrc ${HOME}/.vimrc
 
   echo "Installing Plugins ..."
-  vim +PluginInstall +qall > /dev/null 2>&1
+  vim +PluginInstall +qall +GoInstallBinaries > /dev/null 2>&1
 
   echo "[ OK ] VIM configured!"
 

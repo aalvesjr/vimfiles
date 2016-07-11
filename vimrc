@@ -66,6 +66,7 @@ set ignorecase
 set splitright
 set splitbelow
 set list listchars=tab:»·,trail:·
+set nofoldenable
 
 " Highlighting
 

@@ -11,6 +11,9 @@ echo "Cloning vimfiles from ${VIMFILES_URL}"
 git clone ${VIMFILES_URL} ${VIMTMP}
 
 if [[ $? -eq 0 ]]; then
+  if [[ -d ${VIM_OLD} ]]; then rm -rf ${VIM_OLD} ; fi
+  if [[ -f ${VIMRC_OLD} ]]; then rm -df ${VIMRC_OLD} ; fi
+
   if [[ -d ${VIMFILES_PATH} ]]; then
     echo "Already exists one previous installation of vim, moving '${VIMFILES_PATH}' to '${VIM_OLD}'"
     mv ${VIMFILES_PATH} ${VIM_OLD}

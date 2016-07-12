@@ -1,20 +1,22 @@
 #!/bin/bash
 
-VIMFILES_PATH=${HOME}/.vim
-VIMRC=${HOME}/.vimrc
+VIMFILES_PATH="${HOME}/.vim"
+VIMRC="${HOME}/.vimrc"
 VIMFILES_URL='https://github.com/aalvesjr/vimfiles.git'
-VIMTMP=${HOME}/.vim-tmp
-VIM_OLD=${HOME}/.vim-old
-VIMRC_OLD=${HOME}/.vimrc-old
+VIMTMP="${HOME}/.vim-tmp"
+VIM_OLD="${HOME}/.vim-old"
+VIMRC_OLD="${HOME}/.vimrc-old"
 
 echo "Cloning vimfiles from ${VIMFILES_URL}"
+if [ -d ${VIMTMP} ]; then rm -rf ${VIMTMP} ; fi
+
 git clone ${VIMFILES_URL} ${VIMTMP}
 
-if [[ $? -eq 0 ]]; then
-  if [[ -d ${VIM_OLD} ]]; then rm -rf ${VIM_OLD} ; fi
-  if [[ -f ${VIMRC_OLD} ]]; then rm -df ${VIMRC_OLD} ; fi
+if [ $? -eq 0 ]; then
+  if [ -d ${VIM_OLD} ]; then rm -rf ${VIM_OLD} ; fi
+  if [ -f ${VIMRC_OLD} ]; then rm -df ${VIMRC_OLD} ; fi
 
-  if [[ -d ${VIMFILES_PATH} ]]; then
+  if [ -d ${VIMFILES_PATH} ]; then
     echo "Already exists one previous installation of vim, moving '${VIMFILES_PATH}' to '${VIM_OLD}'"
     mv ${VIMFILES_PATH} ${VIM_OLD}
   fi
@@ -24,7 +26,7 @@ if [[ $? -eq 0 ]]; then
   echo "Cloning 'Vundle.vim' ..."
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-  if [[ -s ${VIMRC} ]]; then
+  if [ -s ${VIMRC} ]; then
     echo "Moving previous '${VIMRC}' to '${VIMRC_OLD}'"
     mv ${VIMRC} ${VIMRC_OLD}
   fi

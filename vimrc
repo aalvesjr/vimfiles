@@ -52,6 +52,17 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+" Completion
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
 " Settings
 
 setlocal foldmethod=indent
@@ -65,12 +76,22 @@ set expandtab
 set ignorecase
 set splitright
 set splitbelow
-set list listchars=tab:»·,trail:·
+"set list listchars=tab:»·,trail:·
 set nofoldenable
+set ruler
+
+" using just 80 columns
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+set colorcolumn=80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.*/
+
+syntax on
 
 " Highlighting
 
-au BufNewFile,BufRead *.erb		set filetype=ruby
+au BufNewFile,BufRead *.erb   set filetype=ruby
+au BufNewFile,BufRead .env.*  set filetype=sh
 
 " Shortcuts
 
@@ -105,3 +126,7 @@ function CollapseMultipleBlankLines()
 
 map  <leader>- :call CollapseMultipleBlankLines()<CR>
 map! <leader>- :call CollapseMultipleBlankLines()<CR>
+
+" Remove white spaces at end line
+autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :g/^\_$\n\_^$/d
